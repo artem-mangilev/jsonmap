@@ -13,13 +13,11 @@ function evalObject(object: any, pathArray: string[]): any {
 }
 
 function evalValueofMethod(parserResult: any, sourceObject: any): any {
-    const stack = []
+    const stack: any[] = []
 
-    if (Array.isArray(parserResult.value)) {
-        stack.push(...parserResult.value)
-    } else {
-        stack.push(parserResult.value)
-    }
+    const pushMany = (data: any) => Array.isArray(data) ? stack.push(...data) : stack.push(data)
+
+    pushMany(parserResult.value);
 
     while (stack.length) {
         const item = stack.pop()
@@ -29,11 +27,7 @@ function evalValueofMethod(parserResult: any, sourceObject: any): any {
         }
 
         if (typeof item.value === 'object') {
-            if (Array.isArray(item.value)) {
-                stack.push(...item.value)
-            } else {
-                stack.push(item.value)
-            }
+            pushMany(item.value);
         }
     }
 }
@@ -42,11 +36,14 @@ class JsonMap {
     public transform(sourceJson: string, transformerJson: string): string {
         const parsedSource = JSON.parse(sourceJson)
         const parsedTransformer = JSON.parse(transformerJson, (key, value) => {
-
             if (isJsonmapToken(value)) {
-                const result = evalValueofMethod((valueOfParser.run(value) as any).result, parsedSource)
-                console.log(result);
-                return result
+                const parserResult = valueOfParser.run(value);
+
+                if (!parserResult.isError) {
+                    return evalValueofMethod(parserResult.result, parsedSource)
+                } else {
+                    console.log(parserResult.error);
+                }
             }
 
             return value
