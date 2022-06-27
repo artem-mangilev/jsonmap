@@ -1,6 +1,6 @@
 import { transform } from './evaluator';
 import { parser } from './parser';
-import { inputJson, transformerJson } from './test-json/value-of-transformer.test-json';
+import { testMap } from './test-json/value-of-transformer.test-json';
 import { isJsonmapToken } from './utils';
 
 class JsonMap {
@@ -19,5 +19,6 @@ class JsonMap {
 }
 
 const jsonmap = new JsonMap()
-console.log(jsonmap.transform(inputJson, transformerJson));
+console.log(jsonmap.transform(testMap['valueOf'].input, testMap['valueOf'].transformer));
+// console.log(jsonmap.transform(testMap['ifcondition'].input, testMap['ifcondition'].transformer));
 

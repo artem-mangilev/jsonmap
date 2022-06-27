@@ -1,4 +1,4 @@
-import { AstNode, ParserResult } from "./parser";
+import { AstNode, ParserResult, TokenType } from "./parser";
 import { evalObject, pushMany } from "./utils";
 
 /**
@@ -15,7 +15,7 @@ export function transform(transformerAst: ParserResult, sourceObject: Record<str
 
         let item: AstNode | undefined
         while (item = stack.pop()) {
-            if (item.type === 'path-items' && Array.isArray(item.value)) {
+            if (item.type === TokenType.PathItems && Array.isArray(item.value)) {
                 return evalObject(sourceObject, item.value.map(({ value }: AstNode) => value as string))
             }
 
