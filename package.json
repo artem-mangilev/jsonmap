@@ -1,0 +1,19 @@
+{
+  "name": "jsonmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "snowpack": "^3.8.8",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "arcsecond": "^4.1.0"
+  }
+}
