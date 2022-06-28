@@ -1,21 +1,15 @@
-import { char, choice, letters, many, possibly, sequenceOf, str } from 'arcsecond';
+import { between, char, choice, letters, many, sepBy, sequenceOf } from 'arcsecond';
 
 export enum TokenType {
-    Root = 'Root',
     Method = 'Method',
     MethodName = 'MethodName',
-    OpenBracket = 'OpenBracket',
-    CloseBracket = 'CloseBracket',
+    MethodParameterList = 'MethodParameterList',
+    MethodParameter = 'MethodParameter',
 
     Path = 'Path',
     PathRoot = 'PathRoot',
     PathItem = 'PathItem',
     PathItems = 'PathItems',
-
-    ConditionExpression = 'ConditionExpression',
-    EvaluationExpression = 'EvaluationExpression',
-    TrueResult = 'TrueResult',
-    FalseResult = 'FalseResult'
 }
 
 export interface AstNode {
@@ -32,35 +26,23 @@ const pathParser = sequenceOf([
     ).map(tag(TokenType.PathItems))
 ]).map(tag(TokenType.Path))
 
-const valueofParser = sequenceOf([
-    str('#valueof').map(tag(TokenType.MethodName)),
-    char('(').map(tag(TokenType.OpenBracket)),
+const methodNameParser = sequenceOf([
+    char('#'),
+    letters
+]).map(([char, name]) => char + name)
+
+const methodParameterParser = choice([
     pathParser,
-    char(')').map(tag(TokenType.CloseBracket))
-]).map(tag(TokenType.Method));
+    // recursion on parser
+]).map(tag(TokenType.MethodParameter))
 
-const conditionParamParser = (isLast: boolean = false) => sequenceOf([
-    choice([
-        valueofParser,
-        letters
-    ]),
-    isLast ? possibly(char(',')) : char(','),
-]).map((value) => value[0])
-
-const ifconditionParser = sequenceOf([
-    str('#ifcondition').map(tag(TokenType.MethodName)),
-    char('(').map(tag(TokenType.OpenBracket)), // TODO: maybe this information is useless
-    conditionParamParser().map(tag(TokenType.ConditionExpression)),
-    conditionParamParser().map(tag(TokenType.EvaluationExpression)),
-    conditionParamParser().map(tag(TokenType.TrueResult)),
-    conditionParamParser(true).map(tag(TokenType.FalseResult)),
-    char(')').map(tag(TokenType.CloseBracket)), // TODO: maybe this information is useless
+export const parser = sequenceOf([
+    methodNameParser.map(tag(TokenType.MethodName)),
+    between(char('('))(char(')'))(
+        sepBy(char(','))(
+            methodParameterParser
+        ).map(tag(TokenType.MethodParameterList))
+    )
 ]).map(tag(TokenType.Method))
-
-export const parser = choice([
-    valueofParser,
-    ifconditionParser
-]).map(tag(TokenType.Root))
-
 
 export type ParserResult = ReturnType<typeof parser.run>
