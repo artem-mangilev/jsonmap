@@ -14,7 +14,7 @@ export enum TokenType {
 
 export interface AstNode {
     type: TokenType,
-    value: string | AstNode[];
+    value: string | AstNode | AstNode[];
 }
 
 const tag = <T>(type: TokenType) => (value: T) => ({ type, value });
