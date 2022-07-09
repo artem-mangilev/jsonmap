@@ -32,7 +32,7 @@ class JsonMap {
 
         // step 2. inline expressions evaluation
         return JSON.stringify(parsedTransformer, (key: string, value: any) => {
-            if (arrayLoopStateManager.getState().toArrayRef.includes(value)) {
+            if (arrayLoopStateManager.getState()?.toArrayRef.includes(value)) {
                 arrayLoopStateManager.nextState()
             }
 
@@ -51,23 +51,23 @@ class JsonMap {
 }
 
 const jsonmap = new JsonMap()
-// console.log('INPUT:')
-// console.log(testMap['valueOf'].input)
-// console.log('TRANSFORMER:')
-// console.log(testMap['valueOf'].transformer)
-// console.log('RESULT:')
-// console.log(jsonmap.transform(testMap['valueOf'].input, testMap['valueOf'].transformer));
+console.log('INPUT:')
+console.log(testMap['valueOf'].input)
+console.log('TRANSFORMER:')
+console.log(testMap['valueOf'].transformer)
+console.log('RESULT:')
+console.log(jsonmap.transform(testMap['valueOf'].input, testMap['valueOf'].transformer));
 
-// console.log('----------')
+console.log('----------')
 
-// console.log('INPUT:')
-// console.log(testMap['ifcondition'].input)
-// console.log('TRANSFORMER:')
-// console.log(testMap['ifcondition'].transformer)
-// console.log('RESULT:')
-// console.log(jsonmap.transform(testMap['ifcondition'].input, testMap['ifcondition'].transformer));
+console.log('INPUT:')
+console.log(testMap['ifcondition'].input)
+console.log('TRANSFORMER:')
+console.log(testMap['ifcondition'].transformer)
+console.log('RESULT:')
+console.log(jsonmap.transform(testMap['ifcondition'].input, testMap['ifcondition'].transformer));
 
-// console.log('----------')
+console.log('----------')
 
 console.log('INPUT:')
 console.log(testMap['loopNumbers'].input)

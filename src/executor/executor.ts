@@ -89,7 +89,12 @@ export class CurrentValueExecutor implements Executor {
     execute(node: AstNode) {
         const state = this.context.arrayLoopStateManager.getState()
 
-        return state.fromArrayRef[state.currentIndex]
+        if (state) {
+            return state.fromArrayRef[state.currentIndex]
+        }
+
+        throw new Error('Current value execution error');
+
     }
 }
 
@@ -101,6 +106,11 @@ export class CurrentIndexExecutor implements Executor {
     execute(node: AstNode) {
         const state = this.context.arrayLoopStateManager.getState()
 
-        return state.currentIndex
+        if (state) {
+            return state.currentIndex
+        }
+
+        throw new Error('Current index execution error');
+
     }
 }

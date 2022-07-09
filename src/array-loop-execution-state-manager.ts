@@ -24,7 +24,11 @@ export class ArrayLoopExecutionStateManager {
         this.state[name].currentIndex++
     }
 
-    getState(name = 'default') {
+    getState(name = 'default'): ArrayMappingState | undefined {
         return this.state[name]
+    }
+
+    hasAnyState(): boolean {
+        return !!Object.keys(this.state).length
     }
 }
