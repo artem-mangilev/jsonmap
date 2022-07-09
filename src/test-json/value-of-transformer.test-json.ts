@@ -35,5 +35,18 @@ export const testMap: TestMap = {
             "ifconditiontesttrue": "#ifcondition(#valueof($.menu.id),github,#valueof($.menu.repository),fail)",
             "ifconditiontestfalse": "#ifcondition(#valueof($.menu.id),xml,#valueof($.menu.repository),fail)"
           }`
+    },
+    loopNumbers: {
+        input: `{
+            "numbers": [1, 2, 3, 4] 
+          }`,
+        transformer: `{
+            "iteration": {
+              "#loop($.numbers)": {
+                "CurrentValue": "#currentvalue()",
+                "CurrentIndex": "#currentindex()"
+              }
+            }
+          }`
     }
 }

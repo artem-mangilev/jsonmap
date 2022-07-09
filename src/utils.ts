@@ -23,3 +23,7 @@ export function evalObject(object: Record<string, any>, pathArray: string[]): an
 
     return currentState;
 }
+
+export function isObject(value: any): boolean {
+    return value !== null && !Array.isArray(value) && typeof value === 'object'
+}
