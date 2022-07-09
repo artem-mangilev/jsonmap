@@ -14,6 +14,7 @@ export enum TokenType {
 
 export interface AstNode {
     type: TokenType,
+    // TODO: too hard structure
     value: string | AstNode | AstNode[];
 }
 
