@@ -1,0 +1,8 @@
+{
+    "iteration": {
+        "#loop($.numbers)": {
+            "CurrentValue": "#currentvalue()",
+            "CurrentIndex": "#currentindex()"
+        }
+    }
+}
