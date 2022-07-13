@@ -6,8 +6,7 @@
     "scripts": {
         "serve": "node",
         "build": "rollup -c rollup.config.js",
-        "test": "npm run build && jest",
-        "jest:debug": "node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --colors --verbose"
+        "test": "npm run build && jest"
     },
     "author": "",
     "license": "ISC",
