@@ -1,10 +1,10 @@
-import { ArrayLoopExecutionStateManager } from './array-loop-execution-state-manager';
-import { ExecutorContext } from './executor/executor';
-import { StructureExecutorContext } from './executor/structure-executor';
-import { AstNode, parser } from './parser';
-import { isJsonmapToken, isObject } from './utils';
+import { ArrayLoopExecutionStateManager } from './array-loop-execution-state-manager'
+import { ExecutorContext } from './executor/executor'
+import { StructureExecutorContext } from './executor/structure-executor'
+import { AstNode, parser } from './parser'
+import { isJsonmapToken, isObject } from './utils'
 
-import 'core-js/actual/structured-clone';
+import 'core-js/actual/structured-clone'
 
 export class JsonMap {
     public transform(sourceJson: string, transformerJson: string): string {
@@ -17,7 +17,7 @@ export class JsonMap {
             if (isObject(value) && isJsonmapToken(Object.keys(value)[0])) {
                 const childKey = Object.keys(value)[0]
 
-                const parserResult = parser.run(childKey);
+                const parserResult = parser.run(childKey)
 
                 if (!parserResult.isError) {
                     structureExecutorContext.setStructureData(value[childKey])
