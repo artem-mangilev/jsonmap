@@ -1,7 +1,7 @@
 {
     "name": "jsonmap-js",
     "version": "0.1.1",
-    "description": "",
+    "description": "Json mapping library written in TypeScript",
     "main": "index.js",
     "scripts": {
         "serve": "node",
@@ -13,6 +13,12 @@
     },
     "author": "Artem Mangilev",
     "license": "ISC",
+    "keywords": [
+        "json",
+        "mapping",
+        "data mapping",
+        "data transformation"
+    ],
     "devDependencies": {
         "@rollup/plugin-commonjs": "^22.0.1",
         "@rollup/plugin-typescript": "^8.3.3",
