@@ -1,14 +1,17 @@
 {
-    "name": "jsonmap",
-    "version": "1.0.0",
+    "name": "jsonmap-js",
+    "version": "0.1.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "serve": "node",
         "build": "rollup -c rollup.config.js",
-        "test": "npm run build && jest"
+        "test": "npm run build && jest",
+        "publish:major": "npm version major && npm publish",
+        "publish:minor": "npm version minor && npm publish",
+        "publish:patch": "npm version patch && npm publish"
     },
-    "author": "",
+    "author": "Artem Mangilev",
     "license": "ISC",
     "devDependencies": {
         "@rollup/plugin-commonjs": "^22.0.1",
