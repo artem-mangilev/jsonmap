@@ -1,6 +1,6 @@
 {
     "name": "jsonmap-js",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Json mapping library written in TypeScript",
     "main": "index.js",
     "scripts": {
