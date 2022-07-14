@@ -1,20 +1,35 @@
 {
-  "name": "jsonmap",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "snowpack dev",
-    "build": "snowpack build"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "snowpack": "^3.8.8",
-    "typescript": "^4.7.4",
-    "utility-types": "^3.10.0"
-  },
-  "dependencies": {
-    "arcsecond": "^4.1.0"
-  }
+    "name": "jsonmap-js",
+    "version": "0.1.2",
+    "description": "Json mapping library written in TypeScript",
+    "main": "index.js",
+    "scripts": {
+        "serve": "node",
+        "build": "rollup -c rollup.config.js",
+        "test": "npm run build && jest",
+        "publish:major": "npm version major && npm publish",
+        "publish:minor": "npm version minor && npm publish",
+        "publish:patch": "npm version patch && npm publish"
+    },
+    "author": "Artem Mangilev",
+    "license": "ISC",
+    "keywords": [
+        "json",
+        "mapping",
+        "data mapping",
+        "data transformation"
+    ],
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^22.0.1",
+        "@rollup/plugin-typescript": "^8.3.3",
+        "jest": "^28.1.2",
+        "rollup": "^2.76.0",
+        "tslib": "^2.4.0",
+        "typescript": "^4.7.4",
+        "utility-types": "^3.10.0"
+    },
+    "dependencies": {
+        "arcsecond": "^4.1.0",
+        "core-js": "^3.23.4"
+    }
 }

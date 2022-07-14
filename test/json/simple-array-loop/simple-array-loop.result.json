@@ -1,0 +1,20 @@
+{
+    "iteration": [
+        {
+            "CurrentValue": 1,
+            "CurrentIndex": 0
+        },
+        {
+            "CurrentValue": 2,
+            "CurrentIndex": 1
+        },
+        {
+            "CurrentValue": 3,
+            "CurrentIndex": 2
+        },
+        {
+            "CurrentValue": 4,
+            "CurrentIndex": 3
+        }
+    ]
+}

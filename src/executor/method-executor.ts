@@ -1,7 +1,7 @@
-import { AstNode } from "../parser";
-import { CurrentIndexExecutor, CurrentValueExecutor, IfConditionExecutor, ValueOfExecutor } from "./executor";
-import { Executor, IExecutorContext } from "./executor.interface";
-import { LoopExecutor } from "./structure-executor";
+import { AstNode } from "../parser"
+import { CurrentIndexExecutor, CurrentValueExecutor, IfConditionExecutor, ValueOfExecutor } from "./executor"
+import { Executor, IExecutorContext } from "./executor.interface"
+import { LoopExecutor } from "./structure-executor"
 
 export class MethodExecutor implements Executor {
     readonly childExecutorList!: Executor[]
@@ -15,7 +15,7 @@ export class MethodExecutor implements Executor {
             new ValueOfExecutor(this.context),
             new CurrentValueExecutor(this.context),
             new CurrentIndexExecutor(this.context)
-        ];
+        ]
     }
 
     execute(node: AstNode[]) {

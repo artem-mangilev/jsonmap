@@ -1,9 +1,9 @@
-import { Executor, IExecutorContext } from "./executor.interface";
-import { PathExecutor } from "./path-executor";
-import { AstNode, TokenType } from "../parser";
-import { LoopExecutor } from "./structure-executor";
-import { MethodExecutor } from "./method-executor";
-import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager";
+import { Executor, IExecutorContext } from "./executor.interface"
+import { PathExecutor } from "./path-executor"
+import { AstNode, TokenType } from "../parser"
+import { LoopExecutor } from "./structure-executor"
+import { MethodExecutor } from "./method-executor"
+import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 
 export class ExecutorContext implements IExecutorContext {
     readonly childExecutorList: Executor[] = [
@@ -18,11 +18,11 @@ export class ExecutorContext implements IExecutorContext {
 
     execute(node: AstNode) {
         if (node.type === TokenType.Method) {
-            const methodExecutor = this.childExecutorList.find((executor) => executor instanceof MethodExecutor)!;
+            const methodExecutor = this.childExecutorList.find((executor) => executor instanceof MethodExecutor)!
 
             return methodExecutor.execute(node.value as AstNode[])
         } else if (node.type === TokenType.Path) {
-            const pathExecutor = this.childExecutorList.find((executor) => executor instanceof PathExecutor)!;
+            const pathExecutor = this.childExecutorList.find((executor) => executor instanceof PathExecutor)!
 
             return pathExecutor.execute(node.value as AstNode[])
         }
@@ -72,11 +72,11 @@ export class ValueOfExecutor implements Executor {
     ) { }
 
     execute(node: AstNode[]) {
-        const [path]: AstNode[] = [node[0].value as AstNode];
+        const [path]: AstNode[] = [node[0].value as AstNode]
 
         if (path.type === TokenType.Path) {
             // ValueOf don't know how to handle path, but context do
-            return this.context.execute(path);
+            return this.context.execute(path)
         }
     }
 }
@@ -93,7 +93,7 @@ export class CurrentValueExecutor implements Executor {
             return state.fromArrayRef[state.currentIndex]
         }
 
-        throw new Error('Current value execution error');
+        throw new Error('Current value execution error')
 
     }
 }
@@ -110,7 +110,7 @@ export class CurrentIndexExecutor implements Executor {
             return state.currentIndex
         }
 
-        throw new Error('Current index execution error');
+        throw new Error('Current index execution error')
 
     }
 }

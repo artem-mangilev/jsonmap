@@ -1,0 +1,6 @@
+{
+    "result": {
+        "Open": "#valueof($.menu.popup.menuitem.open)",
+        "Close": "#valueof($.menu.popup.menuitem.close)"
+    }
+}
