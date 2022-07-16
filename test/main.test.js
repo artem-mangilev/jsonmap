@@ -1,4 +1,4 @@
-const { JsonMap } = require('../bundle');
+const { JsonMap } = require('../index');
 const fs = require('fs');
 const path = require('path')
 

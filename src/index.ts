@@ -3,10 +3,25 @@ import { ExecutorContext } from './executor/executor'
 import { StructureExecutorContext } from './executor/structure-executor'
 import { AstNode, parser } from './parser'
 import { isJsonmapToken, isObject } from './utils'
+import { Required } from 'utility-types'
 
 import 'core-js/actual/structured-clone'
 
+interface JsonMapOptions {
+    space?: number
+}
+
+type JsonMapOptionsInternal = Required<JsonMapOptions>
+
 export class JsonMap {
+    public options: JsonMapOptionsInternal
+
+    constructor(
+        options: JsonMapOptions = {}
+    ) {
+        this.options = fillWithDefaultOptions(options)
+    }
+
     public transform(sourceJson: string, transformerJson: string): string {
         const parsedSource = JSON.parse(sourceJson)
         const arrayLoopStateManager = new ArrayLoopExecutionStateManager()
@@ -47,7 +62,13 @@ export class JsonMap {
 
             return value
 
-        })
+        }, this.options.space)
+    }
+}
+
+function fillWithDefaultOptions({ space }: JsonMapOptions): JsonMapOptionsInternal {
+    return {
+        space: space === undefined ? 0 : space
     }
 }
 
