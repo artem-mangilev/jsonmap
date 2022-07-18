@@ -27,3 +27,9 @@ test('evaluate array #loop', () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate access to array item with index', () => {
+    const [input, transformer, expectedResult] = getTestJsons('index-access');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})

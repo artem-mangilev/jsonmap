@@ -1,4 +1,4 @@
-import { between, char, choice, letters, many, parse, Parser, recursiveParser, sepBy, sequenceOf } from 'arcsecond'
+import { between, char, choice, digits, letters, many, parse, Parser, recursiveParser, sepBy, sequenceOf } from 'arcsecond'
 
 export enum TokenType {
     Method = 'Method',
@@ -23,7 +23,10 @@ const tag = <T>(type: TokenType) => (value: T) => ({ type, value })
 const pathParser = sequenceOf([
     char('$').map(tag(TokenType.PathRoot)),
     many(
-        sequenceOf([char('.'), letters]).map((value) => value[1]).map(tag(TokenType.PathItem))
+        choice([
+            sequenceOf([char('.'), letters]).map((value) => value[1]),
+            between(char('['))(char(']'))(digits)
+        ]).map(tag(TokenType.PathItem))
     ).map(tag(TokenType.PathItems))
 ]).map(tag(TokenType.Path))
 

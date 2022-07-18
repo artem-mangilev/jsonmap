@@ -1,0 +1,6 @@
+{
+    "zeroElement": "#valueof($.array[0])",
+    "firstElement": "#valueof($.array[1])",
+    "secondElement": "#valueof($.array[2])",
+    "thirdElement": "#valueof($.array[3].property)"
+}
