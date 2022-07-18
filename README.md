@@ -24,14 +24,14 @@ Extracts value by provided path.
 **Input:**
 ```json
 {
-	"menu": {
-		"popup": {
-			"menuitem": {
-				"open": "open-text",
-				"close": "close-text"
-			}
-		}
-	}
+    "menu": {
+        "popup": {
+            "menuitem": {
+                "open": "open-text",
+                "close": "close-text"
+            }
+        }
+    }
 }
 ```
 
