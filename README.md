@@ -3,7 +3,7 @@
 This is a javascript data mapping library. It allows you to create complex transferable logic and apply it to your data.
 
 The idea was taken from [this](https://github.com/WorkMaze/JUST.net) awesome repo. The initial goal of jsonmap is to create
-compatibility with JUST.net, but then it could be more adopted for JavaScript world.
+compatibility with JUST.net, but then it could be more adapted for JavaScript world.
 
 ## How to use?
 
