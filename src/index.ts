@@ -45,7 +45,7 @@ export class JsonMap {
         const inlineExpressionExecutorContext = new ExecutorContext(parsedSource, arrayLoopStateManager)
 
         // step 2. inline expressions evaluation
-        return JSON.stringify(parsedTransformer, (key: string, value: any) => {
+        return JSON.stringify(parsedTransformer, (key, value) => {
             if (arrayLoopStateManager.hasArray(value)) {
                 arrayLoopStateManager.setActiveArray(value)
             }

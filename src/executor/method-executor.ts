@@ -19,7 +19,10 @@ export class MethodExecutor implements Executor {
     }
 
     execute(node: AstNode[]) {
-        const [methodName, parameterList] = [node[0].value, node[1].value]
+        const [methodName, parameterList] = [
+            node[0].value,
+            node[1].value
+        ]
 
         const [
             ifConditionExecutor,

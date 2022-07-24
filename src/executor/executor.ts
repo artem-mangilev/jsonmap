@@ -72,7 +72,9 @@ export class ValueOfExecutor implements Executor {
     ) { }
 
     execute(node: AstNode[]) {
-        const [path]: AstNode[] = [node[0].value as AstNode]
+        const [path] = [
+            node[0].value as AstNode
+        ]
 
         if (path.type === TokenType.Path) {
             // ValueOf don't know how to handle path, but context do
