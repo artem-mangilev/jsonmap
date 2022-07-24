@@ -9,7 +9,10 @@ export class PathExecutor implements Executor {
     ) { }
 
     execute(node: AstNode[]) {
-        const [pathRoot, pathItems] = [node[0].value as string, node[1].value as AstNode[]]
+        const [pathRoot, pathItems] = [
+            node[0].value as string,
+            node[1].value as AstNode[]
+        ]
 
         return evalObject(this.context.sourceObject, pathItems.map(({ value }) => value as string))
     }

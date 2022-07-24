@@ -6,8 +6,6 @@
  */
 export const isJsonmapToken = (token: unknown) => typeof token === 'string' && token.startsWith('#')
 
-export const pushMany = <T, A extends Array<any>>(itemOrArray: T, target: A) => Array.isArray(itemOrArray) ? target.push(...itemOrArray) : target.push(itemOrArray)
-
 /**
  * Evaluate properties from pathArray on object
  * 
@@ -26,4 +24,14 @@ export function evalObject(object: Record<string, any>, pathArray: string[]): an
 
 export function isObject(value: any): boolean {
     return value !== null && !Array.isArray(value) && typeof value === 'object'
+}
+
+/**
+ * Get first key of object
+ * 
+ * @param object object
+ * @returns first key
+ */
+export function fkey(object: Record<string, any>): any {
+    return Object.keys(object)[0]
 }

@@ -1,7 +1,6 @@
 import { Executor, IExecutorContext } from "./executor.interface"
 import { PathExecutor } from "./path-executor"
 import { AstNode, TokenType } from "../parser"
-import { LoopExecutor } from "./structure-executor"
 import { MethodExecutor } from "./method-executor"
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 
@@ -17,13 +16,14 @@ export class ExecutorContext implements IExecutorContext {
     ) { }
 
     execute(node: AstNode) {
-        if (node.type === TokenType.Method) {
-            const methodExecutor = this.childExecutorList.find((executor) => executor instanceof MethodExecutor)!
+        const [
+            methodExecutor,
+            pathExecutor
+        ] = this.childExecutorList
 
+        if (node.type === TokenType.Method) {
             return methodExecutor.execute(node.value as AstNode[])
         } else if (node.type === TokenType.Path) {
-            const pathExecutor = this.childExecutorList.find((executor) => executor instanceof PathExecutor)!
-
             return pathExecutor.execute(node.value as AstNode[])
         }
     }
@@ -42,27 +42,27 @@ export class IfConditionExecutor implements Executor {
             node[3].value as AstNode | string
         ]
 
-        const executedConditionExpression: string = (conditionExpression as AstNode)?.type === TokenType.Method
+        const executedConditionExpression = () => (conditionExpression as AstNode)?.type === TokenType.Method
             ? this.context.execute(conditionExpression as AstNode)
             : conditionExpression
 
-        const executedEvaluationExpression: string = (evaluationExpression as AstNode)?.type === TokenType.Method
+        const executedEvaluationExpression = () => (evaluationExpression as AstNode)?.type === TokenType.Method
             ? this.context.execute(evaluationExpression as AstNode)
             : evaluationExpression
 
-        const executedTrueResult: string = (trueResult as AstNode)?.type === TokenType.Method
+        const executedTrueResult = () => (trueResult as AstNode)?.type === TokenType.Method
             ? this.context.execute(trueResult as AstNode)
             : trueResult
 
-        const executedFalseResult: string = (falseResult as AstNode)?.type === TokenType.Method
+        const executedFalseResult = () => (falseResult as AstNode)?.type === TokenType.Method
             ? this.context.execute(falseResult as AstNode)
             : falseResult
 
-        if (executedConditionExpression === executedEvaluationExpression) {
-            return executedTrueResult
+        if (executedConditionExpression() === executedEvaluationExpression()) {
+            return executedTrueResult()
         }
 
-        return executedFalseResult
+        return executedFalseResult()
     }
 }
 
