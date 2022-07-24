@@ -119,6 +119,40 @@ export class CurrentIndexExecutor implements Executor {
     }
 }
 
+export class LastIndexExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode) {
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return state.fromArrayRef.length - 1
+        }
+
+        throw new Error('Last index execution error')
+
+    }
+}
+
+export class LastValueExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode) {
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return state.fromArrayRef[state.fromArrayRef.length - 1]
+        }
+
+        throw new Error('Last index execution error')
+
+    }
+}
+
 export class CurrentValueAtPathExecutor implements Executor {
     constructor(
         public context: IExecutorContext

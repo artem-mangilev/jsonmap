@@ -2,7 +2,9 @@
     "iteration": {
         "#loop($.numbers)": {
             "CurrentValue": "#currentvalue()",
-            "CurrentIndex": "#currentindex()"
+            "CurrentIndex": "#currentindex()",
+            "LastValue": "#lastvalue()",
+            "LastIndex": "#lastindex()"
         }
     },
     "letterIteration": {

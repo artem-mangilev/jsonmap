@@ -2,19 +2,27 @@
     "iteration": [
         {
             "CurrentValue": 1,
-            "CurrentIndex": 0
+            "CurrentIndex": 0,
+            "LastValue": 4,
+            "LastIndex": 3
         },
         {
             "CurrentValue": 2,
-            "CurrentIndex": 1
+            "CurrentIndex": 1,
+            "LastValue": 4,
+            "LastIndex": 3
         },
         {
             "CurrentValue": 3,
-            "CurrentIndex": 2
+            "CurrentIndex": 2,
+            "LastValue": 4,
+            "LastIndex": 3
         },
         {
             "CurrentValue": 4,
-            "CurrentIndex": 3
+            "CurrentIndex": 3,
+            "LastValue": 4,
+            "LastIndex": 3
         }
     ],
     "letterIteration": [
