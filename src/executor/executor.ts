@@ -174,3 +174,25 @@ export class CurrentValueAtPathExecutor implements Executor {
         throw new Error('Current value at path execution error')
     }
 }
+
+export class LastValueAtPathExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode[]) {
+        const [path] = [
+            node[0].value as AstNode
+        ]
+
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return this.context.execute(path, {
+                rootRef: state.fromArrayRef[state.fromArrayRef.length - 1]
+            })
+        }
+
+        throw new Error('Last value at path execution error')
+    }
+}

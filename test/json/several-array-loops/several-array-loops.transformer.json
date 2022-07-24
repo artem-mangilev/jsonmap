@@ -13,6 +13,9 @@
         }
     },
     "objects": {
-        "#loop($.objects)": "#currentvalueatpath($.country)"
+        "#loop($.objects)": {
+            "currentValue": "#currentvalueatpath($.country)",
+            "lastValue": "#lastvalueatpath($.country)"
+        }
     }
 }

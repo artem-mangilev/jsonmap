@@ -40,8 +40,17 @@
         }
     ],
     "objects": [
-        "UK",
-        "USA",
-        "China"
+        {
+            "currentValue": "UK",
+            "lastValue": "China"
+        },
+        {
+            "currentValue": "USA",
+            "lastValue": "China"
+        },
+        {
+            "currentValue": "China",
+            "lastValue": "China"
+        }
     ]
 }
