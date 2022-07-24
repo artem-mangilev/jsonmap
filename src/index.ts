@@ -29,7 +29,7 @@ export class JsonMap {
 
         // step 1. Struct modification and evaluation key expressions (loops, etc.)
         const parsedTransformer = JSON.parse(transformerJson, (key, value) => {
-            if (isObject(value) && isJsonmapToken(Object.keys(value)[0])) {
+            if (isObject(value) && isJsonmapToken(fkey(value))) {
                 const parserResult = parser.run(fkey(value))
 
                 if (!parserResult.isError) {
