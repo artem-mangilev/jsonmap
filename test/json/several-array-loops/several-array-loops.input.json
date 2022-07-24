@@ -10,5 +10,16 @@
         "b",
         "c",
         "d"
+    ],
+    "objects": [
+        {
+            "country": "UK"
+        },
+        {
+            "country": "USA"
+        },
+        {
+            "country": "China"
+        }
     ]
 }

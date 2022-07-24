@@ -9,5 +9,8 @@
         "#loop($.letters)": {
             "CurrentValue": "#currentvalue()"
         }
+    },
+    "objects": {
+        "#loop($.objects)": "#currentvalueatpath($.country)"
     }
 }

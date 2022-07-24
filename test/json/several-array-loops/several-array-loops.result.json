@@ -30,5 +30,10 @@
         {
             "CurrentValue": "d"
         }
+    ],
+    "objects": [
+        "UK",
+        "USA",
+        "China"
     ]
 }

@@ -1,13 +1,13 @@
 import { Executor, IExecutorContext } from "./executor.interface"
-import { PathExecutor } from "./path-executor"
+import { PathExecutor, PathExecutorParams } from "./path-executor"
 import { AstNode, TokenType } from "../parser"
 import { MethodExecutor } from "./method-executor"
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 
 export class ExecutorContext implements IExecutorContext {
-    readonly childExecutorList: Executor[] = [
+    readonly childExecutorList: Executor<any>[] = [
         new MethodExecutor(this),
-        new PathExecutor(this)
+        new PathExecutor<PathExecutorParams>(this)
     ];
 
     constructor(
@@ -15,16 +15,18 @@ export class ExecutorContext implements IExecutorContext {
         public arrayLoopStateManager: ArrayLoopExecutionStateManager
     ) { }
 
-    execute(node: AstNode) {
+    // TODO make some params type checkings
+    // for sending params for correct Executor
+    execute(node: AstNode, params: any = {}) {
         const [
             methodExecutor,
             pathExecutor
         ] = this.childExecutorList
 
         if (node.type === TokenType.Method) {
-            return methodExecutor.execute(node.value as AstNode[])
+            return methodExecutor.execute(node.value as AstNode[], params)
         } else if (node.type === TokenType.Path) {
-            return pathExecutor.execute(node.value as AstNode[])
+            return pathExecutor.execute(node.value as AstNode[], params)
         }
     }
 }
@@ -114,5 +116,27 @@ export class CurrentIndexExecutor implements Executor {
 
         throw new Error('Current index execution error')
 
+    }
+}
+
+export class CurrentValueAtPathExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode[]) {
+        const [path] = [
+            node[0].value as AstNode
+        ]
+
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return this.context.execute(path, {
+                rootRef: state.fromArrayRef[state.currentIndex]
+            })
+        }
+
+        throw new Error('Current value at path execution error')
     }
 }

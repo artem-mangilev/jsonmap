@@ -1,5 +1,5 @@
 import { AstNode } from "../parser"
-import { CurrentIndexExecutor, CurrentValueExecutor, IfConditionExecutor, ValueOfExecutor } from "./executor"
+import { CurrentIndexExecutor, CurrentValueAtPathExecutor, CurrentValueExecutor, IfConditionExecutor, ValueOfExecutor } from "./executor"
 import { Executor, IExecutorContext } from "./executor.interface"
 import { LoopExecutor } from "./structure-executor"
 
@@ -14,7 +14,8 @@ export class MethodExecutor implements Executor {
             new LoopExecutor(this.context),
             new ValueOfExecutor(this.context),
             new CurrentValueExecutor(this.context),
-            new CurrentIndexExecutor(this.context)
+            new CurrentIndexExecutor(this.context),
+            new CurrentValueAtPathExecutor(this.context)
         ]
     }
 
@@ -29,7 +30,8 @@ export class MethodExecutor implements Executor {
             loopExecutor,
             valueOfExecutor,
             currentValueExecutor,
-            currentIndexExecutor
+            currentIndexExecutor,
+            currentValueAtPath
         ] = this.childExecutorList
 
         switch (methodName) {
@@ -43,6 +45,8 @@ export class MethodExecutor implements Executor {
                 return currentValueExecutor.execute(parameterList as AstNode[])
             case '#currentindex':
                 return currentIndexExecutor.execute(parameterList as AstNode[])
+            case '#currentvalueatpath':
+                return currentValueAtPath.execute(parameterList as AstNode[])
         }
     }
 }
