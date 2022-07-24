@@ -4,5 +4,10 @@
             "CurrentValue": "#currentvalue()",
             "CurrentIndex": "#currentindex()"
         }
+    },
+    "letterIteration": {
+        "#loop($.letters)": {
+            "CurrentValue": "#currentvalue()"
+        }
     }
 }

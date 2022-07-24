@@ -8,27 +8,36 @@ export interface ArrayMappingState {
 
 // TODO: make it available for object
 export class ArrayLoopExecutionStateManager {
-    private state: { [loopName: string]: ArrayMappingState } = {};
+    private arrayMap: Map<Array<any>, ArrayMappingState> = new Map()
+    private activeArray?: any[]
 
     addState(
         state: Optional<ArrayMappingState, 'currentIndex'>,
         name = 'default'
     ) {
-        this.state[name] = {
+        this.arrayMap.set(state.toArrayRef, {
             ...state,
             currentIndex: state.currentIndex === undefined ? -1 : state.currentIndex
-        }
+        })
     }
 
     nextState(name = 'default') {
-        this.state[name].currentIndex++
+        if (this.activeArray !== undefined) {
+            this.arrayMap.get(this.activeArray)!.currentIndex++
+        }
     }
 
     getState(name = 'default'): ArrayMappingState | undefined {
-        return this.state[name]
+        if (this.activeArray !== undefined) {
+            return this.arrayMap.get(this.activeArray)
+        }
     }
 
-    hasAnyState(): boolean {
-        return !!Object.keys(this.state).length
+    setActiveArray(array: any[]) {
+        this.activeArray = array
+    }
+
+    hasArray(token: any): boolean {
+        return this.arrayMap.has(token)
     }
 }

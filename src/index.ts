@@ -48,6 +48,10 @@ export class JsonMap {
 
         // step 2. inline expressions evaluation
         return JSON.stringify(parsedTransformer, (key: string, value: any) => {
+            if (arrayLoopStateManager.hasArray(value)) {
+                arrayLoopStateManager.setActiveArray(value)
+            }
+
             if (arrayLoopStateManager.getState()?.toArrayRef.includes(value)) {
                 arrayLoopStateManager.nextState()
             }
@@ -61,7 +65,6 @@ export class JsonMap {
             }
 
             return value
-
         }, this.options.space)
     }
 }

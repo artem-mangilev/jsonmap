@@ -16,5 +16,19 @@
             "CurrentValue": 4,
             "CurrentIndex": 3
         }
+    ],
+    "letterIteration": [
+        {
+            "CurrentValue": "a"
+        },
+        {
+            "CurrentValue": "b"
+        },
+        {
+            "CurrentValue": "c"
+        },
+        {
+            "CurrentValue": "d"
+        }
     ]
 }
