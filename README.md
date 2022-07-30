@@ -85,6 +85,58 @@ Executes condition. Format: ifcondition(firstCompareArgument, secondCompareArgum
 }
 ```
 
+### #loop
+
+Tranverses an array:
+
+**Input:**
+```json
+{
+    "numbers": [
+        1,
+        2,
+        3,
+        4
+    ]
+}
+```
+
+**Transformer:**
+```json
+{
+    "iteration": {
+        "#loop($.numbers)": {
+            "CurrentValue": "#currentvalue()",
+            "CurrentIndex": "#currentindex()"
+        }
+    }
+}
+```
+
+**Result:**
+```json
+{
+    "iteration": [
+        {
+            "CurrentValue": 1,
+            "CurrentIndex": 0
+        },
+        {
+            "CurrentValue": 2,
+            "CurrentIndex": 1
+        },
+        {
+            "CurrentValue": 3,
+            "CurrentIndex": 2
+        },
+        {
+            "CurrentValue": 4,
+            "CurrentIndex": 3
+        }
+    ]
+}
+```
+
 ## Sandbox
 
 https://artem-mangilev.github.io/jsonmap-repl/
