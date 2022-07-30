@@ -1,0 +1,21 @@
+{
+    "iteration": {
+        "#loop($.numbers)": {
+            "CurrentValue": "#currentvalue()",
+            "CurrentIndex": "#currentindex()",
+            "LastValue": "#lastvalue()",
+            "LastIndex": "#lastindex()"
+        }
+    },
+    "letterIteration": {
+        "#loop($.letters)": {
+            "CurrentValue": "#currentvalue()"
+        }
+    },
+    "objects": {
+        "#loop($.objects)": {
+            "currentValue": "#currentvalueatpath($.country)",
+            "lastValue": "#lastvalueatpath($.country)"
+        }
+    }
+}

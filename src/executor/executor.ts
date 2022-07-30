@@ -1,14 +1,13 @@
 import { Executor, IExecutorContext } from "./executor.interface"
-import { PathExecutor } from "./path-executor"
+import { PathExecutor, PathExecutorParams } from "./path-executor"
 import { AstNode, TokenType } from "../parser"
-import { LoopExecutor } from "./structure-executor"
 import { MethodExecutor } from "./method-executor"
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 
 export class ExecutorContext implements IExecutorContext {
-    readonly childExecutorList: Executor[] = [
+    readonly childExecutorList: Executor<any>[] = [
         new MethodExecutor(this),
-        new PathExecutor(this)
+        new PathExecutor<PathExecutorParams>(this)
     ];
 
     constructor(
@@ -16,15 +15,18 @@ export class ExecutorContext implements IExecutorContext {
         public arrayLoopStateManager: ArrayLoopExecutionStateManager
     ) { }
 
-    execute(node: AstNode) {
+    // TODO make some params type checkings
+    // for sending params for correct Executor
+    execute(node: AstNode, params: any = {}) {
+        const [
+            methodExecutor,
+            pathExecutor
+        ] = this.childExecutorList
+
         if (node.type === TokenType.Method) {
-            const methodExecutor = this.childExecutorList.find((executor) => executor instanceof MethodExecutor)!
-
-            return methodExecutor.execute(node.value as AstNode[])
+            return methodExecutor.execute(node.value as AstNode[], params)
         } else if (node.type === TokenType.Path) {
-            const pathExecutor = this.childExecutorList.find((executor) => executor instanceof PathExecutor)!
-
-            return pathExecutor.execute(node.value as AstNode[])
+            return pathExecutor.execute(node.value as AstNode[], params)
         }
     }
 }
@@ -42,27 +44,27 @@ export class IfConditionExecutor implements Executor {
             node[3].value as AstNode | string
         ]
 
-        const executedConditionExpression: string = (conditionExpression as AstNode)?.type === TokenType.Method
+        const executedConditionExpression = () => (conditionExpression as AstNode)?.type === TokenType.Method
             ? this.context.execute(conditionExpression as AstNode)
             : conditionExpression
 
-        const executedEvaluationExpression: string = (evaluationExpression as AstNode)?.type === TokenType.Method
+        const executedEvaluationExpression = () => (evaluationExpression as AstNode)?.type === TokenType.Method
             ? this.context.execute(evaluationExpression as AstNode)
             : evaluationExpression
 
-        const executedTrueResult: string = (trueResult as AstNode)?.type === TokenType.Method
+        const executedTrueResult = () => (trueResult as AstNode)?.type === TokenType.Method
             ? this.context.execute(trueResult as AstNode)
             : trueResult
 
-        const executedFalseResult: string = (falseResult as AstNode)?.type === TokenType.Method
+        const executedFalseResult = () => (falseResult as AstNode)?.type === TokenType.Method
             ? this.context.execute(falseResult as AstNode)
             : falseResult
 
-        if (executedConditionExpression === executedEvaluationExpression) {
-            return executedTrueResult
+        if (executedConditionExpression() === executedEvaluationExpression()) {
+            return executedTrueResult()
         }
 
-        return executedFalseResult
+        return executedFalseResult()
     }
 }
 
@@ -72,7 +74,9 @@ export class ValueOfExecutor implements Executor {
     ) { }
 
     execute(node: AstNode[]) {
-        const [path]: AstNode[] = [node[0].value as AstNode]
+        const [path] = [
+            node[0].value as AstNode
+        ]
 
         if (path.type === TokenType.Path) {
             // ValueOf don't know how to handle path, but context do
@@ -112,5 +116,83 @@ export class CurrentIndexExecutor implements Executor {
 
         throw new Error('Current index execution error')
 
+    }
+}
+
+export class LastIndexExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode) {
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return state.fromArrayRef.length - 1
+        }
+
+        throw new Error('Last index execution error')
+
+    }
+}
+
+export class LastValueExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode) {
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return state.fromArrayRef[state.fromArrayRef.length - 1]
+        }
+
+        throw new Error('Last index execution error')
+
+    }
+}
+
+export class CurrentValueAtPathExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode[]) {
+        const [path] = [
+            node[0].value as AstNode
+        ]
+
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return this.context.execute(path, {
+                rootRef: state.fromArrayRef[state.currentIndex]
+            })
+        }
+
+        throw new Error('Current value at path execution error')
+    }
+}
+
+export class LastValueAtPathExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext
+    ) { }
+
+    execute(node: AstNode[]) {
+        const [path] = [
+            node[0].value as AstNode
+        ]
+
+        const state = this.context.arrayLoopStateManager.getState()
+
+        if (state) {
+            return this.context.execute(path, {
+                rootRef: state.fromArrayRef[state.fromArrayRef.length - 1]
+            })
+        }
+
+        throw new Error('Last value at path execution error')
     }
 }

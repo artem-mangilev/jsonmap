@@ -43,22 +43,21 @@ export class LoopExecutor implements Executor {
     ) { }
 
     execute(node: AstNode[]) {
-        const [path]: AstNode[] = [node[0].value as AstNode]
+        const [path] = [
+            node[0].value as AstNode
+        ]
 
-        const executedPath = this.context.execute(path)
+        const fromArrayRef = this.context.execute(path)
 
-        if (Array.isArray(executedPath)) {
+        if (Array.isArray(fromArrayRef)) {
             const structureData = (this.context as StructureExecutorContext).getStructureData()
 
-            // TODO: make more browser-friendly clonning
-            const mapped = executedPath.map(() => structuredClone(structureData));
+            const toArrayRef = fromArrayRef.map(() => structuredClone(structureData));
 
-            (this.context as StructureExecutorContext).arrayLoopStateManager.addState({
-                fromArrayRef: executedPath,
-                toArrayRef: mapped,
-            })
+            (this.context as StructureExecutorContext)
+                .arrayLoopStateManager.addState({ fromArrayRef, toArrayRef })
 
-            return mapped
+            return toArrayRef
         }
     }
 }

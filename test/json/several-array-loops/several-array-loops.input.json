@@ -1,0 +1,25 @@
+{
+    "numbers": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "letters": [
+        "a",
+        "b",
+        "c",
+        "d"
+    ],
+    "objects": [
+        {
+            "country": "UK"
+        },
+        {
+            "country": "USA"
+        },
+        {
+            "country": "China"
+        }
+    ]
+}
