@@ -1,0 +1,12 @@
+{
+    "families": {
+        "#loop($.nested,families)": {
+            "children": {
+                "#loop($.children)": {
+                    "name": "#currentvalueatpath($.name)",
+                    "surname": "#currentvalueatpath($.family,families)"
+                }
+            }
+        }
+    }
+}

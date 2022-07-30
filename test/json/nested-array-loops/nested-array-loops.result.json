@@ -1,0 +1,40 @@
+{
+    "families": [
+        {
+            "children": [
+                {
+                    "name": "Bob",
+                    "surname": "Smith"
+                },
+                {
+                    "name": "Sarah",
+                    "surname": "Smith"
+                }
+            ]
+        },
+        {
+            "children": [
+                {
+                    "name": "Andrew",
+                    "surname": "Jones"
+                },
+                {
+                    "name": "Victor",
+                    "surname": "Jones"
+                }
+            ]
+        },
+        {
+            "children": [
+                {
+                    "name": "Sam",
+                    "surname": "Johnson"
+                },
+                {
+                    "name": "Stasey",
+                    "surname": "Johnson"
+                }
+            ]
+        }
+    ]
+}

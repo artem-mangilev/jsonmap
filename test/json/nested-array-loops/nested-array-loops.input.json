@@ -1,0 +1,37 @@
+{
+    "nested": [
+        {
+            "family": "Smith",
+            "children": [
+                {
+                    "name": "Bob"
+                },
+                {
+                    "name": "Sarah"
+                }
+            ]
+        },
+        {
+            "family": "Jones",
+            "children": [
+                {
+                    "name": "Andrew"
+                },
+                {
+                    "name": "Victor"
+                }
+            ]
+        },
+        {
+            "family": "Johnson",
+            "children": [
+                {
+                    "name": "Sam"
+                },
+                {
+                    "name": "Stasey"
+                }
+            ]
+        }
+    ]
+}
