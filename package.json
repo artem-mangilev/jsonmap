@@ -8,9 +8,9 @@
         "serve": "node",
         "build": "rollup -c rollup.config.js",
         "test": "npm run build && jest",
-        "publish:major": "npm run build && npm version major && npm publish",
-        "publish:minor": "npm run build && npm version minor && npm publish",
-        "publish:patch": "npm run build && npm version patch && npm publish"
+        "publish:major": "npm run test && npm version major && npm publish",
+        "publish:minor": "npm run test && npm version minor && npm publish",
+        "publish:patch": "npm run test && npm version patch && npm publish"
     },
     "author": "Artem Mangilev",
     "license": "ISC",
