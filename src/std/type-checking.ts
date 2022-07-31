@@ -11,6 +11,5 @@ export function isBoolean(param: unknown): boolean {
 }
 
 export function isArray(param: unknown): boolean {
-    console.log(param)
     return Array.isArray(param)
 }
