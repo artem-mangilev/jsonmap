@@ -41,3 +41,9 @@ test('evaluate access to array item with index', async () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate type checking functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('type-check');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})

@@ -1,10 +1,11 @@
-import { AstNode } from "../parser"
+import { AstNode, TokenType } from "../parser"
 import { CurrentIndexExecutor, CurrentValueAtPathExecutor, CurrentValueExecutor, IfConditionExecutor, LastIndexExecutor, LastValueAtPathExecutor, LastValueExecutor, ValueOfExecutor } from "./executor"
 import { Executor, IExecutorContext } from "./executor.interface"
 import { LoopExecutor } from "./structure-executor"
 
 export class MethodExecutor implements Executor {
     readonly childExecutorList!: Executor[]
+    readonly customFunctionExecutorsMap: { [functionName: string]: CustomFunctionExecutor } = {}
 
     constructor(
         public context: IExecutorContext
@@ -18,8 +19,12 @@ export class MethodExecutor implements Executor {
             new LastValueExecutor(this.context),
             new LastIndexExecutor(this.context),
             new CurrentValueAtPathExecutor(this.context),
-            new LastValueAtPathExecutor(this.context)
+            new LastValueAtPathExecutor(this.context),
         ]
+
+        for (const fnname in this.context.customFunctionsMap) {
+            this.customFunctionExecutorsMap[`#${fnname}`] = new CustomFunctionExecutor(this.context, fnname)
+        }
     }
 
     execute(node: AstNode[]) {
@@ -60,5 +65,24 @@ export class MethodExecutor implements Executor {
             case '#lastvalueatpath':
                 return lastValueAtPathExecutor.execute(parameterList as AstNode[])
         }
+
+        if (this.customFunctionExecutorsMap[methodName as string]) {
+            return this.customFunctionExecutorsMap[methodName as string].execute(parameterList as AstNode[])
+        }
+    }
+}
+
+export class CustomFunctionExecutor implements Executor {
+    constructor(
+        public context: IExecutorContext,
+        public functionName: string
+    ) { }
+
+    execute(node: AstNode[]) {
+        const executedParams = (node.map(n => n.value) as AstNode[]).map((n) =>
+            n.type === TokenType.Method ? this.context.execute(n) : n.value
+        )
+
+        return this.context.customFunctionsMap[this.functionName](...executedParams)
     }
 }

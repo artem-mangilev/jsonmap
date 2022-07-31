@@ -1,5 +1,6 @@
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 import { AstNode, TokenType } from "../parser"
+import { CustomFunctionsMap } from "../types/custom-functions-map"
 import { Executor, IExecutorContext } from "./executor.interface"
 import { MethodExecutor } from "./method-executor"
 import { PathExecutor } from "./path-executor"
@@ -14,7 +15,8 @@ export class StructureExecutorContext implements IExecutorContext {
 
     constructor(
         public sourceObject: Record<string, any>,
-        public arrayLoopStateManager: ArrayLoopExecutionStateManager
+        public arrayLoopStateManager: ArrayLoopExecutionStateManager,
+        public customFunctionsMap: CustomFunctionsMap
     ) { }
 
     execute(node: AstNode) {

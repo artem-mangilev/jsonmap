@@ -1,0 +1,8 @@
+{
+    "isNumberTrue": "#isnumber(#valueof($.integer))",
+    "isNumberFalse": "#isnumber(#valueof($.string))",
+    "isStringTrue": "#isstring(#valueof($.string))",
+    "isStringFalse": "#isstring(#valueof($.integer))",
+    "isBooleanTrue": "#isboolean(#valueof($.boolean))",
+    "isArrayTrue": "#isarray(#valueof($.array))"
+}

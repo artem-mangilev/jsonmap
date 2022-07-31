@@ -3,6 +3,7 @@ import { PathExecutor, PathExecutorParams } from "./path-executor"
 import { AstNode, TokenType } from "../parser"
 import { MethodExecutor } from "./method-executor"
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
+import { CustomFunctionsMap } from "../types/custom-functions-map"
 
 export class ExecutorContext implements IExecutorContext {
     readonly childExecutorList: Executor<any>[] = [
@@ -12,7 +13,8 @@ export class ExecutorContext implements IExecutorContext {
 
     constructor(
         public sourceObject: Record<string, any>,
-        public arrayLoopStateManager: ArrayLoopExecutionStateManager
+        public arrayLoopStateManager: ArrayLoopExecutionStateManager,
+        public customFunctionsMap: CustomFunctionsMap
     ) { }
 
     // TODO make some params type checkings

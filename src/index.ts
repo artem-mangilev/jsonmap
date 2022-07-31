@@ -4,6 +4,8 @@ import { StructureExecutorContext } from './executor/structure-executor'
 import { AstNode, parser } from './parser'
 import { fkey, isJsonmapToken, isObject } from './utils'
 import { Required } from 'utility-types'
+import { isArray, isBoolean, isNumber, isString } from './std/type-checking'
+import { CustomFunctionsMap } from './types/custom-functions-map'
 
 import 'core-js/actual/structured-clone'
 
@@ -16,16 +18,24 @@ type JsonMapOptionsInternal = Required<JsonMapOptions>
 export class JsonMap {
     public options: JsonMapOptionsInternal
 
+    private customFunctions: CustomFunctionsMap = {}
+
     constructor(
         options: JsonMapOptions = {}
     ) {
         this.options = fillWithDefaultOptions(options)
+
+        this.declareStdLibrary()
     }
 
     public transform(sourceJson: string, transformerJson: string): string {
         const parsedSource = JSON.parse(sourceJson)
         const arrayLoopStateManager = new ArrayLoopExecutionStateManager()
-        const structureExecutorContext = new StructureExecutorContext(parsedSource, arrayLoopStateManager)
+        const structureExecutorContext = new StructureExecutorContext(
+            parsedSource,
+            arrayLoopStateManager,
+            this.customFunctions
+        )
 
         // step 1. Struct modification and evaluation key expressions (loops, etc.)
         const parsedTransformer = JSON.parse(transformerJson, (key, value) => {
@@ -42,7 +52,11 @@ export class JsonMap {
             return value
         })
 
-        const inlineExpressionExecutorContext = new ExecutorContext(parsedSource, arrayLoopStateManager)
+        const inlineExpressionExecutorContext = new ExecutorContext(
+            parsedSource,
+            arrayLoopStateManager,
+            this.customFunctions
+        )
 
         // step 2. inline expressions evaluation
         return JSON.stringify(parsedTransformer, (key, value) => {
@@ -64,6 +78,18 @@ export class JsonMap {
 
             return value
         }, this.options.space)
+    }
+
+    declare(functionName: string, fn: (...args: any[]) => any): void {
+        this.customFunctions[functionName] = fn
+    }
+
+    private declareStdLibrary(): void {
+        // Declare type checking api
+        this.declare('isnumber', isNumber)
+        this.declare('isstring', isString)
+        this.declare('isboolean', isBoolean)
+        this.declare('isarray', isArray)
     }
 }
 

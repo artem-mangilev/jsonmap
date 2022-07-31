@@ -1,0 +1,1 @@
+export type CustomFunctionsMap = { [functionName: string]: (...args: any[]) => any }
