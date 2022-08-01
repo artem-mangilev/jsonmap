@@ -1,4 +1,4 @@
-import { between, char, choice, digits, letters, many, parse, Parser, recursiveParser, sepBy, sequenceOf } from 'arcsecond'
+import { anyChar, anyCharExcept, between, char, choice, digits, letter, letters, many, parse, Parser, possibly, recursiveParser, sepBy, sequenceOf } from 'arcsecond'
 
 export enum TokenType {
     Method = 'Method',
@@ -20,11 +20,18 @@ export interface AstNode {
 
 const tag = <T>(type: TokenType) => (value: T) => ({ type, value })
 
+const objectFieldNameParser = many(
+    choice([
+        letter,
+        char('_')
+    ])
+).map((chars) => chars.join(''))
+
 const pathParser = sequenceOf([
     char('$').map(tag(TokenType.PathRoot)),
     many(
         choice([
-            sequenceOf([char('.'), letters]).map((value) => value[1]),
+            sequenceOf([char('.'), objectFieldNameParser]).map((value) => value[1]),
             between(char('['))(char(']'))(digits)
         ]).map(tag(TokenType.PathItem))
     ).map(tag(TokenType.PathItems))
