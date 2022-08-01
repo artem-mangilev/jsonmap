@@ -47,3 +47,9 @@ test('evaluate type checking functions', async () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate type conversion functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('type-conversions');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})

@@ -8,6 +8,7 @@ import { isArray, isBoolean, isNumber, isString } from './std/type-checking'
 import { CustomFunctionsMap } from './types/custom-functions-map'
 
 import 'core-js/actual/structured-clone'
+import { toBoolean, toDecimal, toInteger, toString } from './std/type-conversion'
 
 interface JsonMapOptions {
     space?: number
@@ -93,6 +94,12 @@ export class JsonMap {
         this.declare('isstring', isString)
         this.declare('isboolean', isBoolean)
         this.declare('isarray', isArray)
+
+        // Declare type conversion api
+        this.declare('tointeger', toInteger)
+        this.declare('todecimal', toDecimal)
+        this.declare('toboolean', toBoolean)
+        this.declare('tostring', toString)
     }
 }
 
