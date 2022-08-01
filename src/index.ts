@@ -74,6 +74,9 @@ export class JsonMap {
                 if (!parserResult.isError) {
                     return inlineExpressionExecutorContext.execute(parserResult.result as AstNode)
                 }
+
+                throw new Error(parserResult.error)
+
             }
 
             return value
