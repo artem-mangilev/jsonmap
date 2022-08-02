@@ -1,4 +1,5 @@
 import { AstNode, TokenType } from "../parser"
+import { isLeaf } from "../utils"
 import { CurrentIndexExecutor, CurrentValueAtPathExecutor, CurrentValueExecutor, IfConditionExecutor, LastIndexExecutor, LastValueAtPathExecutor, LastValueExecutor, ValueOfExecutor } from "./executor"
 import { Executor, IExecutorContext } from "./executor.interface"
 import { LoopExecutor } from "./structure-executor"
@@ -80,7 +81,7 @@ export class CustomFunctionExecutor implements Executor {
 
     execute(node: AstNode[]) {
         const executedParams = (node.map(n => n.value) as AstNode[]).map((n) =>
-            n.type === TokenType.Method ? this.context.execute(n) : n.value
+            isLeaf(n) ? n : this.context.execute(n)
         )
 
         return this.context.customFunctionsMap[this.functionName](...executedParams)

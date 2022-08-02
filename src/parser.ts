@@ -42,11 +42,16 @@ const methodNameParser = sequenceOf([
     letters
 ]).map(([char, name]) => char + name)
 
+const plainValueParser = choice([
+    letters,
+    digits
+])
+
 const methodParameterParser: any = recursiveParser(() => choice([
     // method parser itself could be a parameter
     parser,
     pathParser,
-    letters,
+    plainValueParser,
 ]).map(tag(TokenType.MethodParameter)))
 
 export const parser = sequenceOf([

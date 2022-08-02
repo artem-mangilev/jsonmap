@@ -9,6 +9,9 @@ import { CustomFunctionsMap } from './types/custom-functions-map'
 
 import 'core-js/actual/structured-clone'
 import { toBoolean, toDecimal, toInteger, toString } from './std/type-conversion'
+import { getLength } from './std/iterable'
+import { concat, getFirstIndexOf, getLastIndexOf, getSubstring } from './std/string'
+import { add, divide, multiply, round, subtract } from './std/math'
 
 interface JsonMapOptions {
     space?: number
@@ -100,6 +103,22 @@ export class JsonMap {
         this.declare('todecimal', toDecimal)
         this.declare('toboolean', toBoolean)
         this.declare('tostring', toString)
+
+        // Declare api for iterables
+        this.declare('length', getLength)
+
+        // Declare api for strings
+        this.declare('firstindexof', getFirstIndexOf)
+        this.declare('lastindexof', getLastIndexOf)
+        this.declare('substring', getSubstring)
+        this.declare('concat', concat)
+
+        // Declare math api
+        this.declare('add', add)
+        this.declare('subtract', subtract)
+        this.declare('multiply', multiply)
+        this.declare('divide', divide)
+        this.declare('round', round)
     }
 }
 
