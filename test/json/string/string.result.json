@@ -1,5 +1,6 @@
 {
     "length": 11,
     "firstindexof": 6,
-    "lastindexof": 7
+    "lastindexof": 7,
+    "concat": "hello worldabcd"
 }

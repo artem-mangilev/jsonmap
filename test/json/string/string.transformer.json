@@ -1,5 +1,6 @@
 {
     "length": "#length($.string)",
     "firstindexof": "#firstindexof($.string,world)",
-    "lastindexof": "#lastindexof($.string,o)"
+    "lastindexof": "#lastindexof($.string,o)",
+    "concat": "#concat($.string,abcd)"
 }
