@@ -47,3 +47,13 @@ export function fkey(object: Record<string, any>): any {
 export function isLeaf(node: AstNode): boolean {
     return typeof node === 'string'
 }
+
+/**
+ * Type aware not empty checking
+ * 
+ * @param value value
+ * @returns boolean
+ */
+export function notEmpty<T>(value: T | null | undefined): value is T {
+    return value !== null && value !== undefined
+}

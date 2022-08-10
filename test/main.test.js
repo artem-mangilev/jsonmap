@@ -65,3 +65,9 @@ test('evaluate array util functions', async () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate math util functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('math');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})

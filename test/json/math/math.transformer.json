@@ -1,0 +1,7 @@
+{
+    "add": "#add($.numbers[0],$.numbers[1],2)",
+    "subtract": "#subtract($.numbers[2],$.numbers[1],$.numbers[0],1)",
+    "multiply": "#multiply($.numbers[0],$.numbers[1],$.numbers[2])",
+    "divide": "#divide($.numbers[2],$.numbers[1],$.numbers[0])",
+    "round": "#round($.numbers[3],1)"
+}
