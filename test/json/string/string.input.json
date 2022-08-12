@@ -1,3 +1,4 @@
 {
-    "string": "hello world"
+    "string": "hello world",
+    "equalString": "hello world"
 }

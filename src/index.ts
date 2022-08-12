@@ -10,7 +10,7 @@ import { CustomFunctionsMap } from './types/custom-functions-map'
 import 'core-js/actual/structured-clone'
 import { toBoolean, toDecimal, toInteger, toString } from './std/type-conversion'
 import { getLength } from './std/iterable'
-import { concat, getFirstIndexOf, getLastIndexOf, getSubstring } from './std/string'
+import { concat, getFirstIndexOf, getLastIndexOf, getSubstring, stringEquals } from './std/string'
 import { add, divide, multiply, round, subtract } from './std/math'
 
 interface JsonMapOptions {
@@ -112,6 +112,7 @@ export class JsonMap {
         this.declare('lastindexof', getLastIndexOf)
         this.declare('substring', getSubstring)
         this.declare('concat', concat)
+        this.declare('stringequals', stringEquals)
 
         // Declare math api
         this.declare('add', add)

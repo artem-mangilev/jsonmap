@@ -2,5 +2,6 @@
     "length": "#length($.string)",
     "firstindexof": "#firstindexof($.string,world)",
     "lastindexof": "#lastindexof($.string,o)",
-    "concat": "#concat($.string,abcd)"
+    "concat": "#concat($.string,abcd)",
+    "equals": "#stringequals($.string,$.equalString)"
 }
