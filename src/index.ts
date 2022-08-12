@@ -12,6 +12,7 @@ import { toBoolean, toDecimal, toInteger, toString } from './std/type-conversion
 import { getLength } from './std/iterable'
 import { concat, getFirstIndexOf, getLastIndexOf, getSubstring, stringContains, stringEquals } from './std/string'
 import { add, divide, mathEquals, mathGreaterThan, mathGreaterThanOrEqualTo, mathLessThan, mathLessThanOrEqualTo, multiply, round, subtract } from './std/math'
+import { average, concatAll, max, min, sum } from './std/array'
 
 interface JsonMapOptions {
     space?: number
@@ -106,6 +107,13 @@ export class JsonMap {
 
         // Declare api for iterables
         this.declare('length', getLength)
+
+        // Declare api for arrays
+        this.declare('concatAll', concatAll)
+        this.declare('sum', sum)
+        this.declare('average', average)
+        this.declare('min', min)
+        this.declare('max', max)
 
         // Declare api for strings
         this.declare('firstindexof', getFirstIndexOf)

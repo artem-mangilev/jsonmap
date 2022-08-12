@@ -3,5 +3,10 @@
         1,
         2,
         3
+    ],
+    "stringArray": [
+        "hello",
+        " ",
+        "world"
     ]
 }

@@ -1,3 +1,8 @@
 {
-    "length": "#length($.array)"
+    "length": "#length($.array)",
+    "concat": "#concatAll($.stringArray)",
+    "sum": "#sum(#valueof($.array))",
+    "average": "#average($.array)",
+    "min": "#min($.array)",
+    "max": "#max($.array)"
 }
