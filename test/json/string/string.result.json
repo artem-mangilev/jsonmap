@@ -3,5 +3,6 @@
     "firstindexof": 6,
     "lastindexof": 7,
     "concat": "hello worldabcd",
-    "equals": true
+    "equals": true,
+    "contains": true
 }

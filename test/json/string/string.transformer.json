@@ -3,5 +3,6 @@
     "firstindexof": "#firstindexof($.string,world)",
     "lastindexof": "#lastindexof($.string,o)",
     "concat": "#concat($.string,abcd)",
-    "equals": "#stringequals($.string,$.equalString)"
+    "equals": "#stringequals($.string,$.equalString)",
+    "contains": "#stringcontains($.string,world)"
 }

@@ -18,3 +18,6 @@ export function stringEquals(string1: string, string2: string) {
     return string1 === string2
 }
 
+export function stringContains(string: string, substring: string) {
+    return string.includes(substring)
+}
