@@ -11,7 +11,7 @@ import 'core-js/actual/structured-clone'
 import { toBoolean, toDecimal, toInteger, toString } from './std/type-conversion'
 import { getLength } from './std/iterable'
 import { concat, getFirstIndexOf, getLastIndexOf, getSubstring, stringContains, stringEquals } from './std/string'
-import { add, divide, mathEquals, multiply, round, subtract } from './std/math'
+import { add, divide, mathEquals, mathGreaterThan, mathGreaterThanOrEqualTo, mathLessThan, mathLessThanOrEqualTo, multiply, round, subtract } from './std/math'
 
 interface JsonMapOptions {
     space?: number
@@ -122,6 +122,10 @@ export class JsonMap {
         this.declare('divide', divide)
         this.declare('round', round)
         this.declare('mathequals', mathEquals)
+        this.declare('mathgreaterthan', mathGreaterThan)
+        this.declare('mathlessthan', mathLessThan)
+        this.declare('mathgreaterthanorequalto', mathGreaterThanOrEqualTo)
+        this.declare('mathlessthanorequalto', mathLessThanOrEqualTo)
     }
 }
 

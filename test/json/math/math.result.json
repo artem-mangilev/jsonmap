@@ -4,5 +4,9 @@
     "multiply": 64,
     "divide": 1,
     "round": 1.1,
-    "equals": true
+    "equals": true,
+    "greater": true,
+    "less": true,
+    "greaterOrEqual": true,
+    "lessOrEqual": true
 }

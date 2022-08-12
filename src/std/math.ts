@@ -44,5 +44,45 @@ export function mathEquals(number1: unknown, number2: unknown) {
         return castedNumber1 === castedNumber2
     }
 
-    return false
+    throw new Error('Arguments must not be empty')
+}
+
+export function mathGreaterThan(number1: unknown, number2: unknown) {
+    const [castedNumber1, castedNumber2] = [toDecimal(number1), toDecimal(number2)]
+
+    if (notEmpty(castedNumber1) && notEmpty(castedNumber2)) {
+        return castedNumber1 > castedNumber2
+    }
+
+    throw new Error('Arguments must not be empty')
+}
+
+export function mathLessThan(number1: unknown, number2: unknown) {
+    const [castedNumber1, castedNumber2] = [toDecimal(number1), toDecimal(number2)]
+
+    if (notEmpty(castedNumber1) && notEmpty(castedNumber2)) {
+        return castedNumber1 < castedNumber2
+    }
+
+    throw new Error('Arguments must not be empty')
+}
+
+export function mathGreaterThanOrEqualTo(number1: unknown, number2: unknown) {
+    const [castedNumber1, castedNumber2] = [toDecimal(number1), toDecimal(number2)]
+
+    if (notEmpty(castedNumber1) && notEmpty(castedNumber2)) {
+        return castedNumber1 >= castedNumber2
+    }
+
+    throw new Error('Arguments must not be empty')
+}
+
+export function mathLessThanOrEqualTo(number1: unknown, number2: unknown) {
+    const [castedNumber1, castedNumber2] = [toDecimal(number1), toDecimal(number2)]
+
+    if (notEmpty(castedNumber1) && notEmpty(castedNumber2)) {
+        return castedNumber1 <= castedNumber2
+    }
+
+    throw new Error('Arguments must not be empty')
 }
