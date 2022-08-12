@@ -1,0 +1,12 @@
+{
+    "add": "#add($.numbers[0],$.numbers[1],2)",
+    "subtract": "#subtract($.numbers[2],$.numbers[1],$.numbers[0],1)",
+    "multiply": "#multiply($.numbers[0],$.numbers[1],$.numbers[2])",
+    "divide": "#divide($.numbers[2],$.numbers[1],$.numbers[0])",
+    "round": "#round($.numbers[3],1)",
+    "equals": "#mathequals($.numbers[0],2)",
+    "greater": "#mathgreaterthan(5,2)",
+    "less": "#mathlessthan(2,4)",
+    "greaterOrEqual": "#mathgreaterthanorequalto(4,4)",
+    "lessOrEqual": "#mathlessthanorequalto(4,4)"
+}

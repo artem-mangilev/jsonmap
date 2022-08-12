@@ -1,5 +1,6 @@
 import { ArrayLoopExecutionStateManager } from "../array-loop-execution-state-manager"
 import { AstNode } from "../parser"
+import { CustomFunctionsMap } from "../types/custom-functions-map"
 
 export interface Executor<TParams = any> {
     readonly childExecutorList?: Executor<any>[]
@@ -8,5 +9,6 @@ export interface Executor<TParams = any> {
 
 export interface IExecutorContext extends Executor {
     sourceObject: Record<string, any>
-    arrayLoopStateManager: ArrayLoopExecutionStateManager
+    arrayLoopStateManager: ArrayLoopExecutionStateManager,
+    customFunctionsMap: CustomFunctionsMap
 }

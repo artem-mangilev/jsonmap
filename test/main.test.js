@@ -41,3 +41,33 @@ test('evaluate access to array item with index', async () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate type checking functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('type-check');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
+
+test('evaluate type conversion functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('type-conversions');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
+
+test('evaluate string util functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('string');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
+
+test('evaluate array util functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('array');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
+
+test('evaluate math util functions', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('math');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})

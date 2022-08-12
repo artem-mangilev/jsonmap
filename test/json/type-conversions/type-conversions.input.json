@@ -1,0 +1,24 @@
+{
+    "booleans": {
+        "affirmative_string": "true",
+        "negative_string": "false",
+        "affirmative_int": 123,
+        "negative_int": 0
+    },
+    "strings": {
+        "integer": 123,
+        "decimal": 12.34,
+        "affirmative_boolean": true,
+        "negative_boolean": false
+    },
+    "integers": {
+        "string": "123",
+        "decimal": 1.23,
+        "affirmative_boolean": true,
+        "negative_boolean": false
+    },
+    "decimals": {
+        "integer": 123,
+        "string": "1.23"
+    }
+}

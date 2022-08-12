@@ -1,0 +1,8 @@
+{
+    "length": 3,
+    "concat": "hello world",
+    "sum": 6,
+    "average": 2,
+    "min": 1,
+    "max": 3
+}

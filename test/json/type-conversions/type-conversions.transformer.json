@@ -1,0 +1,24 @@
+{
+    "booleans": {
+        "affirmative_string": "#toboolean(#valueof($.booleans.affirmative_string))",
+        "negative_string": "#toboolean(#valueof($.booleans.negative_string))",
+        "affirmative_int": "#toboolean(#valueof($.booleans.affirmative_int))",
+        "negative_int": "#toboolean(#valueof($.booleans.negative_int))"
+    },
+    "strings": {
+        "integer": "#tostring(#valueof($.strings.integer))",
+        "decimal": "#tostring(#valueof($.strings.decimal))",
+        "affirmative_boolean": "#tostring(#valueof($.strings.affirmative_boolean))",
+        "negative_boolean": "#tostring(#valueof($.strings.negative_boolean))"
+    },
+    "integers": {
+        "string": "#tointeger(#valueof($.integers.string))",
+        "decimal": "#tointeger(#valueof($.integers.decimal))",
+        "affirmative_boolean": "#tointeger(#valueof($.integers.affirmative_boolean))",
+        "negative_boolean": "#tointeger(#valueof($.integers.negative_boolean))"
+    },
+    "decimals": {
+        "integer": "#todecimal(#valueof($.decimals.integer))",
+        "string": "#todecimal(#valueof($.decimals.string))"
+    }
+}

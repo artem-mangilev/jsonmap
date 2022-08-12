@@ -1,0 +1,8 @@
+{
+    "isNumberTrue": true,
+    "isNumberFalse": false,
+    "isStringTrue": true,
+    "isStringFalse": false,
+    "isBooleanTrue": true,
+    "isArrayTrue": true
+}
