@@ -71,3 +71,16 @@ test('evaluate math util functions', async () => {
 
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
+
+test('evaluate custom function', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('custom-function');
+
+    const jsonmap = new JsonMap()
+
+    jsonmap.declare('date', (unixtime) =>
+        // convert unix time to human readable date string
+        new Date(+unixtime * 1000).toDateString()
+    )
+
+    expect(JSON.parse(jsonmap.transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
