@@ -386,6 +386,49 @@ Type conversions
 }
 ```
 
+## Plugins
+
+You could extend library functionality by declaring custom functions. Jsonmap's runtime will evaluate function's argument expressions and call this function.
+
+NOTE: Raw value passed to custom function always parsed as string, in this case you should cast it to type you actualy need (for example, in `#date(123)` - 123 is a string
+
+Example:
+
+```js
+const jsonmap = new JsonMap()
+
+jsonmap.declare('date', (unixtime) =>
+    // convert unix time to human readable date string
+    new Date(+unixtime * 1000).toDateString()
+)
+```
+
+Then use.
+
+**Input:**
+
+```json
+{
+    "unixTime": 863222400
+}
+```
+
+**Transformer:**
+
+```json
+{
+    "humanReadableDate": "#date(#valueof($.unixTime))"
+}
+```
+
+**Result:**
+
+```json
+{
+    "humanReadableDate": "Sat May 10 1997"
+}
+```
+
 ## Sandbox
 
 https://artem-mangilev.github.io/jsonmap-repl/
