@@ -1,6 +1,7 @@
 {
     "menu": {
         "id": "github",
-        "repository": "JUST"
+        "repository": "JUST",
+        "number": 10
     }
 }

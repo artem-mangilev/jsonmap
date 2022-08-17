@@ -1,4 +1,6 @@
 {
     "ifconditiontesttrue": "#ifcondition(#valueof($.menu.id),github,#valueof($.menu.repository),fail)",
-    "ifconditiontestfalse": "#ifcondition(#valueof($.menu.id),xml,#valueof($.menu.repository),fail)"
+    "ifconditiontestfalse": "#ifcondition(#valueof($.menu.id),xml,#valueof($.menu.repository),fail)",
+    "ifconditionForNumberIsTrue": "#ifcondition(#valueof($.menu.number),#tointeger(10),#toboolean(true),#toboolean(false)))",
+    "ifconditionForNumberIsFalse": "#ifcondition(#valueof($.menu.number),#tointeger(15),#toboolean(true),#toboolean(false)))"
 }

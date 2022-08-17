@@ -1,4 +1,6 @@
 {
     "ifconditiontesttrue": "JUST",
-    "ifconditiontestfalse": "fail"
+    "ifconditiontestfalse": "fail",
+    "ifconditionForNumberIsTrue": true,
+    "ifconditionForNumberIsFalse": false
 }
