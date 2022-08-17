@@ -72,6 +72,12 @@ test('evaluate math util functions', async () => {
     expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
 })
 
+test('evaluate parser checks', async () => {
+    const [input, transformer, expectedResult] = await getTestJsons('parser');
+
+    expect(JSON.parse(new JsonMap().transform(input, transformer))).toEqual(JSON.parse(expectedResult))
+})
+
 test('evaluate custom function', async () => {
     const [input, transformer, expectedResult] = await getTestJsons('custom-function');
 
