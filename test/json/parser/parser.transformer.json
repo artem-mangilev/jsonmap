@@ -1,0 +1,3 @@
+{
+    "spaceBetweenArguments": "#ifcondition(#valueof($.string), hello, true, false)"
+}
